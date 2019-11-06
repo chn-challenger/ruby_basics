@@ -18,30 +18,6 @@ which is an example, or ***instance*** of an ```Array```.
 
 Every object belongs to a type, and type is also known as ***class***.  Therefore the ***class*** of an object is the type to which it belongs to.  Almost every object you create in Ruby is an ***instance*** of some class.
 
-## Calling Or Invoking Methods On An Object  
-
-With any ***object*** in Ruby, depending on its ***class***, we maybe able to ***call*** or ***invoke*** some ***methods*** on that ***object***.   The ***methods*** available to call on a given object, depends on its ***class*** and are defined by its ***class***.  *Intuitively, invoking a method on an object is similar to sending a message to the object to ask it to do something.*  Once a method have been invoked on an object, you can imaging some action is performed, and at the end, something - an ***object*** is *returned*, the returned object is called the *return value* of the method.  Different methods, depending on its purpose, will obviously return different things, or objects.
-
-When we call the ```length```method on a ```String``` instance, the method returns a ```Integer``` instance, which is the length of this string.
-```ruby
-$ "Hello World".length
-$ => 11
-```
-
-When we call the ```odd?``` method on a ```Integer``` instance, the method returns a ```Boolean``` instance, true or false depending on if this integer is odd or not. (The ? of odd? is a part of the name of the method.)
-```ruby
-$ 14.odd?
-$ => false
-```
-
-When we call the ```reverse``` method on a ```Array``` instance, the method returns another ```Array``` instance, based on this array, but with the elements reversed.
-```ruby
-$ [1,2,5,"hello"].reverse
-$ => ["hello",5,2,1]
-```
-
-Methods always return some object, which does not need to be in the same class as the objects which the method was called, or invoked upon.  I.e. calling ```length``` on a ```String``` returns some ```Integer```.
-
 ## Local Variable / Object Reference / Pointer To An Object
 One of the most important mechanism in Ruby, and in many languages is the setting of ***local variables***, such as
 ```ruby
@@ -79,8 +55,82 @@ $ array_1
 $ => [1,"Hello there!",2]
 ```
 Surprised?  So why?  Well this is what actually happened, when we set ```array_2 = array_1```.  Ruby understood this as: the name ```array_2``` now points the the same object which ```array_1``` is pointing to, which if you remember, is ```[1,2,3]``` with object id of **78980102910**.  Therefore, we now have two names. or pointers, or references to the object ```[1,2,3]``` with id **78980102910**.  You can probably see now why I think calling ```array_1``` and ```array_2``` as *local variables* is in fact not that intuitive. So let's stick with pointers or references to objects!  
+
 So Ok, when we did ```array_2[1] = "Hello there!"``` we set the value of the index 1 element of the ```[1,2,3]``` with id **78980102910** from 2 to ```"Hello there!"```, so it is now ```[1,"Hello there!",2]```.  Therefore, when we called ```array_1``` later, that's a bit like saying: hey ```array_1``` can you bring out the object which you are pointing to, and so it returns ```[1,"Hello there!",2]``` with id **78980102910**.
+
 As a side note, you may wonder, if I want to make a copy of ```[1,2,3]``` and assign it to ```array_1```, how would I do that?  Well, that could in fact be complicated, depends on what you mean by a ***copy***.   
+
+## Calling Or Invoking Methods On An Object  
+
+With any ***object*** in Ruby, depending on its ***class***, we maybe able to ***call*** or ***invoke*** some ***methods*** on that ***object***.   The ***methods*** available to call on a given object, depends on its ***class*** and are defined by its ***class***.  *Intuitively, invoking a method on an object is similar to sending a message to the object to ask it to do something.*  Once a method have been invoked on an object, you can imaging some action is performed, and at the end, something - an ***object*** is *returned*, the returned object is called the *return value* of the method.  Different methods, depending on its purpose, will obviously return different things, or objects.
+
+When we call the ```length```method on a ```String``` instance, the method returns a ```Integer``` instance, which is the length of this string.
+```ruby
+$ "Hello World".length
+$ => 11
+```
+
+When we call the ```odd?``` method on a ```Integer``` instance, the method returns a ```Boolean``` instance, true or false depending on if this integer is odd or not. (The ? of odd? is a part of the name of the method.)
+```ruby
+$ 14.odd?
+$ => false
+```
+
+When we call the ```reverse``` method on a ```Array``` instance, the method returns another ```Array``` instance, based on this array, but with the elements reversed.
+```ruby
+$ [1,2,5,"hello"].reverse
+$ => ["hello",5,2,1]
+```
+
+Some methods will also take some arguments:
+```ruby
+$ "hello world".gsub("o","O")
+$ => "hellO, wOrld"
+```
+in this example, the ```gsub``` method of a string takes two arguments, a substring to be replaced ```o```, and its replacement ```O```.
+
+Methods always return some object, which does not need to be in the same class as the objects which the method was called, or invoked upon.  I.e. calling ```length``` on a ```String``` returns some ```Integer```.
+
+All method calls / invocations have the same structure: **object** then **.** then **method name**, if there are arguments **(argument_1, argument_2)**.  Examples of ***normal*** method calls on objects:
+```ruby
+$ 123.to_s
+$ => "123"
+```
+```ruby
+$ "hello world".split(" ")
+$ => ["hello", "world"]
+```
+```ruby
+$ ["hello"," ","world"].join
+$ => "hello world"
+```
+
+So why do I see things like:
+```ruby
+$ puts "string"
+$ => nil  
+```
+where there is no **.** or the object before the dot? And what about:
+```ruby
+$ 4 % 2
+$ => 0
+```
+And:
+```ruby
+$ [1,2,3] << 4
+$ => [1,2,3,4]
+```
+Are these method calls or not???  
+
+The answers is ***Yes they are!***, the reason they do not look normal, is because they are essentially shortcuts for normal method calls.  
+
+The ```puts "string"``` is the same as ```puts("string")```, in Ruby you can omit the argument bracket in some situations. Also there is no object which ```puts``` method is called upon, and so the object is the default ```main``` object, which we do not care or use for most part, so it matters not, but ```puts``` is called on it, so an object is called upon.
+
+The second example ```4 % 2``` is exactly the same as ```4.%(2)```!
+
+The third example ```[1,2,3] << 4``` is exactly the same as ```[1,2,3].<<(4)```!
+
+So yes all method calls follow the convention:  **object.method(arguments)**!
 
 ## Mutation Methods and Non-Mutation Methods
 

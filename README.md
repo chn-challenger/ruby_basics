@@ -14,7 +14,7 @@ which is an example, or ***instance*** of an ```Integer```.
 ```ruby
 $ [2,"world"]
 ```
-which is an example, or***instance*** of an ```Array```.
+which is an example, or ***instance*** of an ```Array```.
 
 Every object belongs to a type, and type is also known as ***class***.  Therefore the ***class*** of an object is the type to which it belongs to.  Almost every object you create in Ruby is an ***instance*** of some class.
 
@@ -60,13 +60,30 @@ Means the name ```array_1``` points to the ```Array``` instance ```[1,2,3]```, w
 $ array_1.object_id
 $ => 78980102910
 ```
-In the code above, Firstly ```array_1``` returns the object which it is pointed to, that is ```[1,2,3]```, then calling ```.object_id``` on it.
-
+In the code above, Firstly ```array_1``` returns the object which it is pointed to, that is ```[1,2,3]```, then calling ```.object_id``` on it returns its object id (every object in Ruby has an unique id).
+```ruby
+$ array_2 = array_1
+```
+Now, what do you think the above code is doing?    
+```ruby
+$ array_2[1] = "Hello there!"
+```
+What do you think ```array_1``` look like now?  Same as before (```[1,2,3]```)?  Since we obviously made no changes to it...?
+```ruby
+$ array_1
+$ ...
+```
+Ok, enough teasing, here is the answer:
+```ruby
+$ array_1
+$ => [1,"Hello there!",2]
+```
+Surprised?  So why?  Well this is what actually happened, when we set ```array_2 = array_1```.  Ruby understood this as: the name ```array_2``` now points the the same object which ```array_1``` is pointing to, which if you remember, is ```[1,2,3]``` with object id of **78980102910**.  Therefore, we now have two names. or pointers, or references to the object ```[1,2,3]``` with id **78980102910**.  You can probably see now why I think calling ```array_1``` and ```array_2``` as *local variables* is in fact not that intuitive. So let's stick with pointers or references to objects!  
+So Ok, when we did ```array_2[1] = "Hello there!"``` we set the value of the index 1 element of the ```[1,2,3]``` with id **78980102910** from 2 to ```"Hello there!"```, so it is now ```[1,"Hello there!",2]```.  Therefore, when we called ```array_1``` later, that's a bit like saying: hey ```array_1``` can you bring out the object which you are pointing to, and so it returns ```[1,"Hello there!",2]``` with id **78980102910**.
+As a side note, you may wonder, if I want to make a copy of ```[1,2,3]``` and assign it to ```array_1```, how would I do that?  Well, that could in fact be complicated, depends on what you mean by a ***copy***.   
 
 ## Mutation Methods and Non-Mutation Methods
 
 ## Ruby Docs
-
-
 
 ## Defining An Classless Method

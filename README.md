@@ -23,19 +23,19 @@ Every object belongs to a type, and type is also known as ***class***.  Therefor
 With any ***object*** in Ruby, depending on its ***class***, we maybe able to ***call*** or ***invoke*** some ***methods*** on that ***object***.   The ***methods*** available to call on a given object, depends on its ***class*** and are defined by its ***class***.  *Intuitively, invoking a method on an object is similar to sending a message to the object to ask it to do something.*  Once a method have been invoked on an object, you can imaging some action is performed, and at the end, something - an ***object*** is *returned*, the returned object is called the *return value* of the method.  Different methods, depending on its purpose, will obviously return different things, or objects.
 
 When we call the ```length```method on a ```String``` instance, the method returns a ```Integer``` instance, which is the length of this string.
-```
+```ruby
 $ "Hello World".length
 $ => 11
 ```
 
 When we call the ```odd?``` method on a ```Integer``` instance, the method returns a ```Boolean``` instance, true or false depending on if this integer is odd or not. (The ? of odd? is a part of the name of the method.)
-```
+```ruby
 $ 14.odd?
 $ => false
 ```
 
 When we call the ```reverse``` method on a ```Array``` instance, the method returns another ```Array``` instance, based on this array, but with the elements reversed.
-```
+```ruby
 $ [1,2,5,"hello"].reverse
 $ => ["hello",5,2,1]
 ```

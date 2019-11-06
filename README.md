@@ -43,7 +43,29 @@ $ => ["hello",5,2,1]
 Methods always return some object, which does not need to be in the same class as the objects which the method was called, or invoked upon.  I.e. calling ```length``` on a ```String``` returns some ```Integer```.
 
 ## Local Variable / Object Reference / Pointer To An Object
+One of the most important mechanism in Ruby, and in many languages is the setting of ***local variables***, such as
+```ruby
+$ my_var = "Hello world"
+```
+There are a few ways to understand what's happening above:
+1. We set the ```String``` object ```"Hello world"``` to ***the local variable*** with the name of ```my_var```.
+2. We give the ```"Hello world"``` object a ***reference name*** of ```my_var```.
+3. We assign the pointer with the name of ```my_var``` to the object ```"Hello world"```.  
+Interpretations 2. and 3. are the most useful, thinking of the variable name as a pointer to some ruby object which it is assigned to, or as a reference name to some ruby objects.  For example
+```ruby
+$ array_1 = [1,2,3]
+```
+Means the name ```array_1``` points to the ```Array``` instance ```[1,2,3]```, whose object id can be read by calling ```.object_id``` on the object:
+```ruby
+$ array_1.object_id
+$ => 78980102910
+```
+In the code above, Firstly ```array_1``` returns the object which it is pointed to, that is ```[1,2,3]```, then calling ```.object_id``` on it.
 
+
+## Mutation Methods and Non-Mutation Methods
+
+## Ruby Docs
 
 
 
